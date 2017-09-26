@@ -7,13 +7,17 @@ import kareltherobot.*;
  */
 public class TreasureBot extends Robot
 {
+    
+    int beepers = 0;
     public TreasureBot(int st, int av, Direction dir, int numBeepers) {
         super(st, av, dir, numBeepers);
     }
     
     public void findTreasure() {
-        countPile();
-        moveSpaces();
+        while(beepers != 5) {
+            countPile();
+            moveSpaces();
+        }
     }
     
    public void turnRight(){
@@ -23,12 +27,19 @@ public class TreasureBot extends Robot
     }
     
     public void faceNorth() {
-        if (!facingNorth()
+        if (!facingNorth()) {
         turnLeft();
     }
-    
+}
+
+public void moveSpaces() {
+    while (!nextToABeeper()) {
+        move();
+    }
+}
+
     public void countPile() {
-        faceNorth();
+        turnSofacingNorth();
             while (nextToABeeper())
             { pickBeeper();
               while(nextToABeeper())
@@ -49,3 +60,11 @@ public class TreasureBot extends Robot
               }
     }
 }
+
+public void turnSofacingNorth() {
+        while (!facingNorth()) {
+        turnLeft();
+    }
+}
+}
+
